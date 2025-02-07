@@ -22,4 +22,12 @@ class fireStoreDatabase {
         .snapshots();
     return postStream;
   }
+  // Future <>
+  Future<void> deletePostByID (String postID) async {
+      try {
+        await FirebaseFirestore.instance.collection('Post').doc(postID).delete();
+      } catch (e) {
+        print(e.toString());
+      }
+  }
 }

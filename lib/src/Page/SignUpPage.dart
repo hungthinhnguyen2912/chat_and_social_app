@@ -23,6 +23,7 @@ class _SignupPageState extends State<SignupPage> {
 
   void register() async {
     if (passController.text != confirmpassController.text) {
+      if (!mounted) return;
       showDialog(
         context: context,
         builder: (context) => AlertDialog(

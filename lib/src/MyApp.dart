@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire/src/Page/ProfilePage.dart';
-import 'package:flutterfire/src/Page/UserPage.dart';
+import 'package:flutterfire/src/Page/user_to_chat.dart';
 import 'auth/AuthPage.dart';
 
 

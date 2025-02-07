@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfire/src/database/firestore.dart';
 import 'package:flutterfire/src/database/userfirestore.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -22,7 +23,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Profile')),
+      appBar: AppBar(title: Text('Profile'),actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],),
       body: FutureBuilder(
         future: getUserdetails(),
         builder: (context, snapshot) {
@@ -73,10 +74,35 @@ class ProfilePage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final post =
                                     posts[index].data() as Map<String, dynamic>;
+                                String docId = posts[index].id;
                                 return ListTile(
                                   title: Text(post['postMessage']),
                                   subtitle: Text(
                                       post['Timestamp'].toDate().toString()),
+                                  trailing: IconButton(
+                                      onPressed: () async {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                AlertDialog(
+                                                  title: Text('Delete'),
+                                                  content: Text('Do you want to delete this post'),
+                                                  actions: [
+                                                    TextButton(onPressed: () async {
+                                                      try {
+                                                        await FirebaseFirestore.instance.collection('Post').doc(docId).delete();
+                                                        Navigator.pop(context);
+                                                      } catch (e) {
+                                                        print('Some thing went wrong');
+                                                      }
+                                                    }, child: Text('Yes')),
+                                                    TextButton(onPressed: () {
+                                                      Navigator.pop(context);
+                                                    }, child: Text('No')),
+                                                  ],
+                                                ));
+                                      },
+                                      icon: Icon(Icons.delete)),
                                 );
                               },
                             );

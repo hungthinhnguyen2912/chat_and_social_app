@@ -1,11 +1,11 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class chat_bubble extends StatelessWidget {
   final String messsage;
   final bool isCurrentUser;
-
-  chat_bubble({super.key, required this.messsage, required this.isCurrentUser});
+  chat_bubble({super.key, required this.messsage, required this.isCurrentUser,});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +16,13 @@ class chat_bubble extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: isCurrentUser ? Colors.lightGreenAccent : Colors.black12,
       ),
-      child: Text(
-        messsage,
-        style: TextStyle(fontSize: 18),
+      child: Column(
+        children: [
+          Text(
+            messsage,
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
       ),
     );
   }

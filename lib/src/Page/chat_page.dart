@@ -69,7 +69,7 @@ class ChatPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
-            chat_bubble(messsage: data['message'], isCurrentUser: isCurrentUser)
+            chat_bubble(messsage: data['message'], isCurrentUser: isCurrentUser,)
           ],
         ));
   }
